@@ -1,0 +1,33 @@
+{
+	"name": "orgchart",
+	"version": "0.0.3",
+	"homepage": "https://github.com/dabeng/OrgChart",
+	"authors": [
+		"dabeng <dabeng413@gmail.com>"
+	],
+	"description": "Simple and direct organization chart(tree-like hierarchy) plugin based on pure DOM and jQuery.",
+	"main": [
+		"dist/js/orgchart.min.js",
+		"dist/css/orgchart.min.css"
+	],
+	"keywords": [
+		"plugin",
+		"organization",
+		"chart",
+		"orgchart",
+		"tree",
+		"tree-like",
+		"tree-view"
+	],
+	"license": "MIT",
+	"ignore": [
+		"**/.*",
+		"node_modules",
+		"bower_components",
+		"test",
+		"tests"
+	],
+	"dependencies": {
+		"html2canvas": "^0.4.1"
+	}
+}

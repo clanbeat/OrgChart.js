@@ -1,4 +1,4 @@
-export default class OrgChart {
+class OrgChart {
   constructor(options) {
     this._name = 'OrgChart';
     Promise.prototype.finally = function (callback) {
@@ -1763,3 +1763,5 @@ export default class OrgChart {
     }
   }
 }
+
+window.OrgChart = OrgChart;

@@ -14,6 +14,12 @@ var gulp = require('gulp'),
   merge = require('merge-stream'),
   plumber = require('gulp-plumber');
 
+gulp.task('cleanDistCSS', function() {
+  return del(['dist/css']);
+});
+gulp.task('cleanDistJS', function() {
+  return del(['dist/js']);
+});
 gulp.task('cleanCSS', function() {
   return del(['build/css']);
 });
@@ -43,6 +49,13 @@ gulp.task('css', ['csslint', 'cleanCSS'], function() {
     .pipe(gulp.dest('demo/css'));
 });
 
+gulp.task('dist-css', ['csslint', 'cleanDistCSS'], function() {
+  return gulp.src('src/*.css')
+    .pipe(cleanCSS())
+    .pipe(rename('orgchart.min.css'))
+    .pipe(gulp.dest('dist/css'));
+});
+
 gulp.task('eslint', function () {
   return gulp.src(['src/*.js'])
     .pipe(eslint('.eslintrc.json'))
@@ -61,6 +74,16 @@ gulp.task('js', ['eslint', 'cleanJS'], function () {
     .pipe(sourcemaps.write())
     .pipe(gulp.dest('build/js'))
     .pipe(gulp.dest('demo/js'));
+});
+
+gulp.task('dist-js', ['eslint', 'cleanDistJS'], function () {
+  return gulp.src(['src/*.js'])
+    .pipe(babel(
+      {presets: ['es2015']}
+    ))
+    .pipe(uglify())
+    .pipe(rename('orgchart.min.js'))
+    .pipe(gulp.dest('dist/js'));
 });
 
 gulp.task('watch', function () {
@@ -82,6 +105,8 @@ gulp.task('copyVendorAssets', function() {
 });
 
 gulp.task('build', ['css', 'js', 'watch']);
+
+gulp.task('dist', ['dist-css', 'dist-js']);
 
 gulp.task('webpack', ['build'], function () {
   webpack(require('./webpack.config.js'), function(err, stats) {

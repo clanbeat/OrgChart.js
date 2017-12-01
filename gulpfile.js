@@ -52,7 +52,7 @@ gulp.task('css', ['csslint', 'cleanCSS'], function() {
 gulp.task('dist-css', ['csslint', 'cleanDistCSS'], function() {
   return gulp.src('src/*.css')
     .pipe(cleanCSS())
-    .pipe(rename('orgchart.min.css'))
+    .pipe(rename('orgchart.css'))
     .pipe(gulp.dest('dist/css'));
 });
 
@@ -81,8 +81,7 @@ gulp.task('dist-js', ['eslint', 'cleanDistJS'], function () {
     .pipe(babel(
       {presets: ['es2015']}
     ))
-    .pipe(uglify())
-    .pipe(rename('orgchart.min.js'))
+    .pipe(rename('orgchart.js'))
     .pipe(gulp.dest('dist/js'));
 });
 
